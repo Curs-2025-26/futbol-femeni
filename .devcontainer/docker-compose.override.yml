@@ -1,0 +1,43 @@
+services:
+  laravel:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "80:80"
+      - "5173:5173"
+    volumes:
+      - ..:/var/www/html
+    networks:
+      - laravelnet
+    depends_on:
+      - mysql
+      - mailpit
+
+  mysql:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: laravel
+      MYSQL_USER: sail
+      MYSQL_PASSWORD: password
+    ports:
+      - "3306:3306"
+    volumes:
+      - dbdata:/var/lib/mysql
+    networks:
+      - laravelnet
+
+  mailpit:
+    image: axllent/mailpit:latest
+    ports:
+      - "1025:1025"
+      - "8025:8025"
+    networks:
+      - laravelnet
+
+networks:
+  laravelnet:
+
+volumes:
+  dbdata:

@@ -1,20 +1,16 @@
 {
-    "name": "Laravel Codespace",
-    "dockerFile": "Dockerfile",
-    "forwardPorts": [8000,5173],
+    "name": "Laravel (Codespaces)",
+    "dockerComposeFile": "docker-compose.override.yml",
+    "service": "laravel",
+    "workspaceFolder": "/var/www/html",
+    "overrideCommand": true,
+    "postCreateCommand": "cp -n .env.example .env && composer install && php artisan key:generate && npm install && npm run build && sed -i \"s|^APP_URL=.*|APP_URL=https://$CODESPACE_NAME-80.app.github.dev|\" .env && sed -i \"s|^VITE_APP_URL=.*|VITE_APP_URL=https://$CODESPACE_NAME-5173.app.github.dev|\" .env",
+    "forwardPorts": [80, 5173, 3306, 8025],
     "portsAttributes": {
-        "8000": { "label": "Laravel" },
-        "5173": { "label": "Vite", "onAutoForward": "silent" }
-    },
-    "postCreateCommand": "composer install && cp -n .env.example .env  && php artisan key:generate && npm ci && npm run build",
-    "customizations": {
-        "vscode": {
-            "extensions": [
-                "bmewburn.vscode-intelephense-client",
-                "ryannaddy.laravel-artisan",
-                "onecentlin.laravel-blade",
-                "esbenp.prettier-vscode"
-            ]
-        }
+        "80":   { "label": "Laravel" },
+        "5173": { "label": "Vite" },
+        "3306": { "label": "MySQL" },
+        "8025": { "label": "Mailpit" }
     }
 }
+

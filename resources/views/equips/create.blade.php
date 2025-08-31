@@ -12,7 +12,7 @@
   </div>
 @endif
 
-<form action="{{ route('equips.store') }}" method="POST" class="space-y-4">
+<form action="{{ route('equips.store') }}" method="POST" class="space-y-4" >
   @csrf
   <div>
     <label for="nom" class="block font-bold">Nom:</label>

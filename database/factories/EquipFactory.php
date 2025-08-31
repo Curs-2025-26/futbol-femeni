@@ -22,7 +22,7 @@ class EquipFactory extends Factory
             'nom' => $this->faker->unique()->company,
             'titols' => $this->faker->numberBetween(0, 50),
             'estadi_id' =>  Estadi::factory(),
-            'escut' => 'escuts/dummy.png', // Imatge de prova predefinida
+            //'escut' => 'escuts/dummy.png',
         ];
     }
 }

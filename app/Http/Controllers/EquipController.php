@@ -7,8 +7,7 @@ use App\Http\Requests\UpdateEquipRequest;
 use App\Models\Equip;
 use App\Models\Estadi;
 use App\Services\EquipService;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Session;
+
 class EquipController extends Controller {
     public function __construct(private EquipService $servei) {}
 
@@ -24,7 +23,7 @@ class EquipController extends Controller {
     }
     // POST /equips
     public function store(StoreEquipRequest $request) {
-        $this->servei->guardar($request->validated());
+        $this->servei->guardar($request->validated(),$request->file('escut'));
         return redirect()->route('equips.index');
     }
 
@@ -41,7 +40,7 @@ class EquipController extends Controller {
 
     // PUT /equips/{id}/edit
     public function update(UpdateEquipRequest $request, $id) {
-        $this->servei->actualitzar($id, $request->validated());
+        $this->servei->actualitzar($id, $request->validated(),$request->file('escut'));
         return redirect()->route('equips.index')->with('ok', 'Equip actualitzat');
     }
 

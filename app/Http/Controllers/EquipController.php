@@ -35,12 +35,13 @@ class EquipController extends Controller {
 
     // GET /equips/{id}/edit
     public function edit(Equip $equip) {
-        return view('equips.edit', compact('equip'));
+        $estadis = Estadi::all();
+        return view('equips.edit', compact('equip','estadis'));
     }
 
     // PUT /equips/{id}/edit
-    public function update(Request $request, Equip $equip) {
-        $this->servei->actualitzar($equip, $request->validated());
+    public function update(UpdateEquipRequest $request, $id) {
+        $this->servei->actualitzar($id, $request->validated());
         return redirect()->route('equips.index')->with('ok', 'Equip actualitzat');
     }
 

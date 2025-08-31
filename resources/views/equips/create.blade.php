@@ -12,7 +12,7 @@
   </div>
 @endif
 
-<form action="{{ route('equips.store') }}" method="POST" class="space-y-4" >
+<form action="{{ route('equips.store') }}" method="POST" enctype="multipart/form-data" class="space-y-4" >
   @csrf
   <div>
     <label for="nom" class="block font-bold">Nom:</label>
@@ -27,6 +27,11 @@
                 </option>
             @endforeach
         </select>
+        <div class="mb-4">
+          <label for="escut" class="block text-sm font-medium text-gray-700 mb-1">Escut:</label>
+          <input type="file" name="escut" id="escut"
+                 class="w-full border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500">
+        </div>
   </div>
   <div>
     <label for="titols" class="block font-bold">Títols:</label>

@@ -30,21 +30,24 @@
                 <td class="border border-gray-300 p-2">{{ $equip->estadi->nom }}</td>
                 <td class="border border-gray-300 p-2">{{ $equip->titols }}</td>
                 <td class="border border-gray-300 p-2 flex space-x-2">
-                    <a href="{{ route('equips.edit', $equip->id) }}"
-                       class="bg-yellow-500 text-white px-2 py-1 rounded hover:bg-yellow-600 flex items-center space-x-1">
-                        <span>✏️</span>
-                    </a>
-
-                    <form action="{{ route('equips.destroy', $equip->id) }}" method="POST"
-                          onsubmit="return confirm('Segur que vols eliminar aquest equip?');">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit"
-                                class="bg-red-600 text-white px-2 py-1 rounded hover:bg-red-700 flex items-center space-x-1">
-                            <span>🗑️</span>
-                        </button>
-                    </form>
-                </td>
+                    @can('update', $equip)
+                        <a href="{{ route('equips.edit', $equip->id) }}"
+                           class="bg-yellow-500 text-white px-2 py-1 rounded hover:bg-yellow-600 flex items-center space-x-1">
+                            <span>✏️</span>
+                        </a>
+                    @endcan
+                    @can('delete',$equip)
+                        <form action="{{ route('equips.destroy', $equip->id) }}" method="POST"
+                              onsubmit="return confirm('Segur que vols eliminar aquest equip?');">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit"
+                                    class="bg-red-600 text-white px-2 py-1 rounded hover:bg-red-700 flex items-center space-x-1">
+                                <span>🗑️</span>
+                            </button>
+                        </form>
+                    @endcan
+                 </td>
             </tr>
         @endforeach
         </tbody>

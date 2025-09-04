@@ -2,18 +2,16 @@
 
 namespace App\Policies;
 
-use App\Models\User;
 use App\Models\Equip;
+use App\Models\User;
+use Illuminate\Auth\Access\Response;
 
 class EquipPolicy
 {
-    /**
-     * Determine whether the user can create models.
-     */
     public function create(User $user): bool
     {
         // Només els administradors poden crear equips
-        return $user->role === 'administrador';
+         return $user->role === 'administrador';
     }
 
     /**

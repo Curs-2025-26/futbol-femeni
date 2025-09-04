@@ -24,6 +24,10 @@ Route::middleware(['auth', RoleMiddleware::class.':administrador' ])->group(func
     Route::resource('/equips', EquipController::class)->except(['index', 'show']);
     Route::resource('/estadis', EstadiController::class)->except(['index', 'show']);
 });
+Route::middleware(['auth', RoleMiddleware::class.':manager' ])->group(function (){
+    Route::resource('/equips', EquipController::class)->only([ 'update','edit' ]);
+    Route::resource('/estadis', EstadiController::class)->only([ 'edit','update']);
+});
 Route::resource('/equips', EquipController::class)->only(['index', 'show']);
 Route::resource('/estadis', EstadiController::class)->only(['index', 'show']);
 

@@ -21,13 +21,13 @@ class EquipController extends Controller {
 
     // GET /equips/create
     public function create() {
-        $this->authorize('create');
+        $this->authorize('create',Equip::class);
         $estadis = Estadi::all();
         return view('equips.create',compact('estadis'));
     }
     // POST /equips
     public function store(StoreEquipRequest $request) {
-        $this->authorize('create');
+        $this->authorize('create', Equip::class);
         $this->servei->guardar($request->validated(),$request->file('escut'));
         return redirect()->route('equips.index');
     }
@@ -55,8 +55,9 @@ class EquipController extends Controller {
 
 
     // DELETE /equips/{id}
-    public function destroy($id) {
-        $this->servei->eliminar($id);
+    public function destroy(Equip $equip) {
+        $this->authorize('delete', $equip);
+        $this->servei->eliminar($equip->id);
         return redirect()->route('equips.index');
     }
 }

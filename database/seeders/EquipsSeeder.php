@@ -35,7 +35,7 @@ class EquipsSeeder extends Seeder
         foreach (Equip::all() as $equip){
             User::create([
                 'name' => 'Manager  '.$equip->nom,
-                'email' => $equip->nom.'@manager.com',
+                'email' => $equip->id.'@manager.com',
                 'password' => Hash::make('1234'),
                 'role' => 'manager',
                 'equip_id' => $equip->id,

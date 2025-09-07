@@ -27,7 +27,7 @@ class EquipController extends Controller {
     }
     // POST /equips
     public function store(StoreEquipRequest $request) {
-        $this->authorize('create', Equip::class);
+
         $this->servei->guardar($request->validated(),$request->file('escut'));
         return redirect()->route('equips.index');
     }
@@ -46,7 +46,7 @@ class EquipController extends Controller {
 
     // PUT /equips/{id}/edit
     public function update(UpdateEquipRequest $request, Equip $equip) {
-        $this->authorize('update', $equip);
+
         $this->servei->actualitzar($equip->id, $request->validated(),$request->file('escut'));
         return redirect()->route('equips.index')->with('ok', 'Equip actualitzat');
     }

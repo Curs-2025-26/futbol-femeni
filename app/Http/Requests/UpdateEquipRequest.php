@@ -11,7 +11,8 @@ class UpdateEquipRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return true;
+        $equip = $this->route('equip'); // Obté l'equip de la ruta
+        return $this->user()->can('update', $equip);
     }
 
     /**
@@ -21,10 +22,12 @@ class UpdateEquipRequest extends FormRequest
      */
     public function rules(): array
     {
+        $equipId = $this->route('equip')->id; // Obté l'ID de l'equip actual
+
         return [
-            'nom'    => 'required|min:3',
-            'estadi_id' => 'required|integer|exists:estadis,id',
-            'titols' => 'required|integer|min:0',
+            'nom' => 'required|unique:equips,nom,' . $equipId,
+            'titols' => 'integer|min:0',
+            'estadi_id' => 'required|exists:estadis,id',
             'escut' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
         ];
     }

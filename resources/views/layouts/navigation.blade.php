@@ -11,7 +11,6 @@
                 </div>
 
                 <!-- Navigation Links -->
-                <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
@@ -38,6 +37,15 @@
                     <x-slot name="content">
                         <x-dropdown-link :href="route('profile.edit')">
                             {{ __('Profile') }}
+                        </x-dropdown-link>
+                        <x-dropdown-link :href="route('setLocale','ca')">
+                            {{ __('Català') }}
+                        </x-dropdown-link>
+                        <x-dropdown-link :href="route('setLocale','es')">
+                            {{ __('Castellano') }}
+                        </x-dropdown-link>
+                        <x-dropdown-link :href="route('setLocale','en')">
+                            {{ __('English') }}
                         </x-dropdown-link>
 
                         <!-- Authentication -->

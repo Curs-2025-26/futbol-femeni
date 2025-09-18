@@ -25,10 +25,10 @@ class UpdateEquipRequest extends FormRequest
         $equipId = $this->route('equip')->id; // Obté l'ID de l'equip actual
 
         return [
-            'nom' => 'required|unique:equips,nom,' . $equipId,
-            'titols' => 'integer|min:0',
-            'estadi_id' => 'required|exists:estadis,id',
-            'escut' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+            'nom' => 'sometimes|required|unique:equips,nom,' . $equipId,
+            'titols' => 'sometimes|integer|min:0',
+            'estadi_id' => 'sometimes|required|exists:estadis,id',
+            'escut' => 'sometimes|nullable|image|mimes:jpeg,png,jpg|max:2048',
         ];
     }
 }

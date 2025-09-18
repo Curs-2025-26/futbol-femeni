@@ -2,12 +2,13 @@
 namespace App\Services;
 
 use App\Models\Equip;
+use App\Repositories\BaseRepository;
 use App\Repositories\EquipRepository;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 
 class EquipService {
-    public function __construct(private EquipRepository $repo) {}
+    public function __construct(private BaseRepository $repo) {}
 
     public function guardar(array $data, ?UploadedFile $escut = null): Equip {
         if ($escut) {
